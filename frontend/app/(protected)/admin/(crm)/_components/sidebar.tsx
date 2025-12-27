@@ -220,7 +220,7 @@ export const Sidebar = ({
           id: "machines-tools",
           label: "Machines & Tools",
           icon: Cog,
-          href: "/admin/machines-tools",
+          href: "/admin/equipment/machines-and-tools",
           badge: 2,
         },
       ],
