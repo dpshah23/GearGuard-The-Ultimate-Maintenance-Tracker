@@ -110,6 +110,7 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            'builtins': ['gearguard_backend.compat.templatetags.compat_filters'],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
