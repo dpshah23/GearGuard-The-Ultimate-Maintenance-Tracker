@@ -85,3 +85,40 @@ def list_maintenance_requests(request):
             # 'created_at':equipment.created_at,
         })
     return JsonResponse(data,safe=False)
+
+def request_detail_view(request,pk):
+    
+    """
+    Docstring for equipment_detail_view
+    
+    :param request: Description
+    :param equipment_id: Description
+    
+    
+    :return: Description of return value
+    Returns the details of a specific equipment object by ID.
+
+    """
+
+    if not request.method=='GET':
+        return JsonResponse({'error':'Invalid HTTP method'},status=405)
+    
+    try:
+        equipment=MaintenanceRequest.objects.get(id=pk)
+        data={
+            'id':equipment.id,
+            'subject':equipment.subject,
+            'description':equipment.description,
+            'equipment_id':equipment.equipment_id,
+            'request_type':equipment.request_type,
+            'status':equipment.status,
+            'assigned_to_id':equipment.assigned_to.id if equipment.assigned_to else None,
+            'assigned_team_id':equipment.assigned_team.id if equipment.assigned_team else None,
+            'scheduled_date':equipment.scheduled_date,
+            'duration_hours':equipment.duration_hours,
+            'created_by_id':equipment.created_by.id if equipment.created_by else None,
+            # 'created_at':equipment.created_at,
+        }
+        return JsonResponse(data,status=200)
+    except MaintenanceRequest.DoesNotExist:
+        return JsonResponse({'error':'Maintenance Request not found'},status=404)
