@@ -195,7 +195,7 @@ def equipment_delete_view(request, pk):
     except Equipment.DoesNotExist:
         return JsonResponse({'error':'Equipment not found'},status=404)
 
-def getmaintancerequestforequipment_view(request, equipment_id):
+def getmaintancerequestforequipment_view(request, pk):
     
     """
     Docstring for getmaintancerequestforequipment_view
@@ -214,7 +214,7 @@ def getmaintancerequestforequipment_view(request, equipment_id):
 
     
     try:
-        equipment=Equipment.objects.get(id=equipment_id)
+        equipment=Equipment.objects.get(id=pk)
         maintenancerequests=equipment.maintenancerequest_set.all()
         data=[]
         for mr in maintenancerequests:
