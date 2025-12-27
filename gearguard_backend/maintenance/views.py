@@ -4,7 +4,8 @@ from rest_framework.response import Response
 
 from .models import MaintenanceRequest
 from .serializers import MaintenanceRequestSerializer
-
+import json
+from django.http import JsonResponse
 
 class MaintenanceRequestViewSet(viewsets.ModelViewSet):
     serializer_class = MaintenanceRequestSerializer
@@ -52,3 +53,35 @@ class MaintenanceRequestViewSet(viewsets.ModelViewSet):
         task.save()
 
         return Response({"message": "Task assigned successfully"})
+    
+def list_maintenance_requests(request):
+
+    """
+    Docstring for list_equipment_view
+    
+    :param request: Description
+    :return: Description of return value
+    Returns a list of all equipment objects.
+
+    """
+
+    if not request.method=='GET':
+        return JsonResponse({'error':'Invalid HTTP method'},status=405)
+    data=[]
+    equipments=MaintenanceRequest.objects.all()
+    for equipment in equipments:
+        data.append({
+            'id':equipment.id,
+            'subject':equipment.subject,
+            'description':equipment.description,
+            'equipment_id':equipment.equipment_id,
+            'request_type':equipment.request_type,
+            'status':equipment.status,
+            'assigned_to_id':equipment.assigned_to.id if equipment.assigned_to else None,
+            'assigned_team_id':equipment.assigned_team.id if equipment.assigned_team else None,
+            'scheduled_date':equipment.scheduled_date,
+            'duration_hours':equipment.duration_hours,
+            'created_by_id':equipment.created_by.id if equipment.created_by else None,
+            # 'created_at':equipment.created_at,
+        })
+    return JsonResponse(data,safe=False)
