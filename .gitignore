@@ -11,4 +11,62 @@ db.sqlite3
 .idea/
 *.log
 coverage/
+*.sqlite3
+*.egg-info/
+dist/
+htmlcov/    
+.tox/
+pip-wheel-metadata/
+.pytest_cache/
+celerybeat-schedule
+instance/
+.webassets-cache/
+.coverage
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pyre/
+.mypy_cache/
+.dmypy.json
+.pytype/
+.cache/
+celerybeat-schedule
+__pypackages__/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+
+# Ignore IDE specific files
+
+*.sublime-project
+*.sublime-workspace
+# JetBrains IDEs
+.idea/
+*.iml
+# VS Code
+.vscode/
+
+# Ignore system files
+Thumbs.db
+.DS_Store
+ehthumbs.db
+Icon?
+.Spotlight-V100
+.Trashes
+Desktop.ini
+*.log
+
+# Ignore test coverage files
+htmlcov/
+.coverage
+.tox/
+.nox/
+.coverage.*
+.cache
+nosetests.xml
+
+
 
