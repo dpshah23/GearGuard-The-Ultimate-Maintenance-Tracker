@@ -235,6 +235,13 @@ def getmaintancerequestforequipment_view(request, pk):
     except Equipment.DoesNotExist:
         return JsonResponse({'error':'Equipment not found'},status=404)
     
-
-
-    
+def getName(pk):
+    # try:
+    equipment=Equipment.objects.get(id=pk)
+    data={ 
+        'name':equipment.name,
+    }
+    return data
+        # return Json(data,status=200)
+    # except Equipment.DoesNotExist:
+        # return JsonResponse({'error':'Equipment not found'},status=404)

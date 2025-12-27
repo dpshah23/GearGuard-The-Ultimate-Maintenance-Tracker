@@ -6,6 +6,7 @@ from .models import MaintenanceRequest
 from .serializers import MaintenanceRequestSerializer
 import json
 from django.http import JsonResponse
+from equipment.views import getName 
 
 class MaintenanceRequestViewSet(viewsets.ModelViewSet):
     serializer_class = MaintenanceRequestSerializer
@@ -70,11 +71,13 @@ def list_maintenance_requests(request):
     data=[]
     equipments=MaintenanceRequest.objects.all()
     for equipment in equipments:
+        # print(getName(equipment.equipment_id).get('name'))
         data.append({
             'id':equipment.id,
             'subject':equipment.subject,
             'description':equipment.description,
-            'equipment_id':equipment.equipment_id,
+            'equipment_id': equipment.equipment_id,
+            'equipment_name':getName(equipment.equipment_id).get('name'),
             'request_type':equipment.request_type,
             'status':equipment.status,
             'assigned_to_id':equipment.assigned_to.id if equipment.assigned_to else None,
@@ -110,6 +113,7 @@ def request_detail_view(request,pk):
             'subject':equipment.subject,
             'description':equipment.description,
             'equipment_id':equipment.equipment_id,
+            'equipment_name':getName(equipment.equipment_id).get('name'),
             'request_type':equipment.request_type,
             'status':equipment.status,
             'assigned_to_id':equipment.assigned_to.id if equipment.assigned_to else None,
