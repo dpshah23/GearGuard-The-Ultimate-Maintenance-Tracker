@@ -18,7 +18,6 @@ import { Button } from "@heroui/button";
 import { Card, CardBody } from "@heroui/card";
 import { Chip } from "@heroui/chip";
 import { Avatar, AvatarGroup } from "@heroui/avatar";
-import { Link } from "@heroui/link";
 
 import AnimatedBackground from "@/components/animated-background";
 import { Navbar } from "@/components/navbar";
