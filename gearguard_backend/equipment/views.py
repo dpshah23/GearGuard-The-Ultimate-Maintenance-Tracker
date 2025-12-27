@@ -92,7 +92,7 @@ def list_equipment_view(request):
 
 
 
-def equipment_detail_view(request, equipment_id):
+def equipment_detail_view(request,pk):
     
     """
     Docstring for equipment_detail_view
@@ -110,7 +110,7 @@ def equipment_detail_view(request, equipment_id):
         return JsonResponse({'error':'Invalid HTTP method'},status=405)
     
     try:
-        equipment=Equipment.objects.get(id=equipment_id)
+        equipment=Equipment.objects.get(id=pk)
         data={
             'id':equipment.id,
             'name':equipment.name,
@@ -127,7 +127,7 @@ def equipment_detail_view(request, equipment_id):
     except Equipment.DoesNotExist:
         return JsonResponse({'error':'Equipment not found'},status=404)
 
-def equipment_update_view(request, equipment_id):
+def equipment_update_view(request, pk):
 
     """
     Docstring for equipment_update_view
@@ -148,7 +148,7 @@ def equipment_update_view(request, equipment_id):
     
     data=json.loads(request.body)
     try:
-        equipment=Equipment.objects.get(id=equipment_id)
+        equipment=Equipment.objects.get(id=pk)
 
         equipment.name=data.get('name',equipment.name)
         equipment.serial_number=data.get('serial_number',equipment.serial_number)
@@ -171,7 +171,7 @@ def equipment_update_view(request, equipment_id):
     except Equipment.DoesNotExist:
         return JsonResponse({'error':'Equipment not found'},status=404)
 
-def equipment_delete_view(request, equipment_id):
+def equipment_delete_view(request, pk):
 
     """
     Docstring for equipment_delete_view
@@ -189,8 +189,8 @@ def equipment_delete_view(request, equipment_id):
         return JsonResponse({'error':'Invalid HTTP method'},status=405)
     
     try:
-        equipment=Equipment.objects.get(id=equipment_id)
-        equipment.delete()
+        equipment=Equipment.objects.get(id=pk)
+        equipment.delete()  
         return JsonResponse({'message':'Equipment deleted successfully'},status=200)
     except Equipment.DoesNotExist:
         return JsonResponse({'error':'Equipment not found'},status=404)
@@ -211,7 +211,7 @@ def getmaintancerequestforequipment_view(request, equipment_id):
     if not request.method=='GET':
         return JsonResponse({'error':'Invalid HTTP method'},status=405)
     
-    
+
     
     try:
         equipment=Equipment.objects.get(id=equipment_id)
