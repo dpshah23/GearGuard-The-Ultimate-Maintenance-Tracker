@@ -1,0 +1,185 @@
+├── docs
+│   └── db-schema.md
+├── frontend
+│   ├── app
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   └── providers.tsx
+│   ├── components
+│   │   ├── animated-background.tsx
+│   │   ├── icons.tsx
+│   │   ├── navbar.tsx
+│   │   ├── primitives.ts
+│   │   └── theme-switch.tsx
+│   ├── config
+│   │   ├── fonts.ts
+│   │   └── site.ts
+│   ├── eslint.config.mjs
+│   ├── LICENSE
+│   ├── next-env.d.ts
+│   ├── next.config.js
+│   ├── package.json
+│   ├── pnpm-lock.yaml
+│   ├── postcss.config.js
+│   ├── public
+│   │   ├── favicon.ico
+│   │   ├── next.svg
+│   │   └── vercel.svg
+│   ├── README.md
+│   ├── styles
+│   │   └── globals.css
+│   ├── tailwind.config.mjs
+│   ├── tsconfig.json
+│   └── types
+│       └── index.ts
+├── gearguard_backend
+│   ├── analytics
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       └── __init__.cpython-311.pyc
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── admin.cpython-311.pyc
+│   │       ├── apps.cpython-311.pyc
+│   │       ├── models.cpython-311.pyc
+│   │       ├── urls.cpython-311.pyc
+│   │       └── __init__.cpython-311.pyc
+│   ├── departements
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── 0001_initial.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       ├── 0001_initial.cpython-311.pyc
+│   │   │       └── __init__.cpython-311.pyc
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── admin.cpython-311.pyc
+│   │       ├── apps.cpython-311.pyc
+│   │       ├── models.cpython-311.pyc
+│   │       ├── urls.cpython-311.pyc
+│   │       └── __init__.cpython-311.pyc
+│   ├── equipment
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── 0001_initial.py
+│   │   │   ├── 0002_initial.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       ├── 0001_initial.cpython-311.pyc
+│   │   │       ├── 0002_initial.cpython-311.pyc
+│   │   │       └── __init__.cpython-311.pyc
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── admin.cpython-311.pyc
+│   │       ├── apps.cpython-311.pyc
+│   │       ├── models.cpython-311.pyc
+│   │       ├── urls.cpython-311.pyc
+│   │       └── __init__.cpython-311.pyc
+│   ├── gearguard_backend
+│   │   ├── asgi.py
+│   │   ├── compat
+│   │   │   ├── templatetags
+│   │   │   │   ├── compat_filters.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── __pycache__
+│   │   │   │       ├── compat_filters.cpython-311.pyc
+│   │   │   │       └── __init__.cpython-311.pyc
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       └── __init__.cpython-311.pyc
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── wsgi.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── settings.cpython-311.pyc
+│   │       ├── urls.cpython-311.pyc
+│   │       ├── wsgi.cpython-311.pyc
+│   │       └── __init__.cpython-311.pyc
+│   ├── maintenance
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── 0001_initial.py
+│   │   │   ├── 0002_initial.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       ├── 0001_initial.cpython-311.pyc
+│   │   │       ├── 0002_initial.cpython-311.pyc
+│   │   │       └── __init__.cpython-311.pyc
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── admin.cpython-311.pyc
+│   │       ├── apps.cpython-311.pyc
+│   │       ├── models.cpython-311.pyc
+│   │       ├── urls.cpython-311.pyc
+│   │       ├── views.cpython-311.pyc
+│   │       └── __init__.cpython-311.pyc
+│   ├── manage.py
+│   ├── requirements.txt
+│   ├── teams
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── 0001_initial.py
+│   │   │   ├── 0002_initial.py
+│   │   │   ├── __init__.py
+│   │   │   └── __pycache__
+│   │   │       ├── 0001_initial.cpython-311.pyc
+│   │   │       ├── 0002_initial.cpython-311.pyc
+│   │   │       └── __init__.cpython-311.pyc
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── admin.cpython-311.pyc
+│   │       ├── apps.cpython-311.pyc
+│   │       ├── models.cpython-311.pyc
+│   │       ├── urls.cpython-311.pyc
+│   │       └── __init__.cpython-311.pyc
+│   └── users
+│       ├── admin.py
+│       ├── apps.py
+│       ├── migrations
+│       │   ├── 0001_initial.py
+│       │   ├── __init__.py
+│       │   └── __pycache__
+│       │       ├── 0001_initial.cpython-311.pyc
+│       │       └── __init__.cpython-311.pyc
+│       ├── models.py
+│       ├── tests.py
+│       ├── urls.py
+│       ├── views.py
+│       ├── __init__.py
+│       └── __pycache__
+│           ├── admin.cpython-311.pyc
+│           ├── apps.cpython-311.pyc
+│           ├── models.cpython-311.pyc
+│           ├── urls.cpython-311.pyc
+│           └── __init__.cpython-311.pyc
+├── README.md
+└── tmp_migfix.py
