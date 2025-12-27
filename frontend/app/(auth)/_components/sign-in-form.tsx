@@ -12,6 +12,7 @@ import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { LoginSchema } from "@/schemas";
+import { signInAction } from "@/actions/sign-in";
 
 export const SignInForm = ({ redirectTo }: { redirectTo?: string }) => {
   const [error, setError] = useState(false);
@@ -58,56 +59,51 @@ export const SignInForm = ({ redirectTo }: { redirectTo?: string }) => {
     startTransition(async () => {
       try {
         console.log("data", data);
-        // const result = await signInAction(data, {
-        //   redirectTo: redirectTo,
-        // });
+        const result = await signInAction(data, {
+          redirectTo: redirectTo,
+        });
 
-        // if (!result.success && result.fieldErrors) {
-        //   Object.entries(result.fieldErrors).forEach(([field, messages]) => {
-        //     if (messages.length > 0) {
-        //       form.setError(field as keyof typeof data, {
-        //         type: "server",
-        //         message: messages[0], // show only the first message
-        //       });
-        //     }
-        //   });
+        if (!result.success && result.fieldErrors) {
+          Object.entries(result.fieldErrors).forEach(([field, messages]) => {
+            if (messages.length > 0) {
+              form.setError(field as keyof typeof data, {
+                type: "server",
+                message: messages[0], // show only the first message
+              });
+            }
+          });
 
-        //   return;
-        // }
+          return;
+        }
 
-        // if (result.success) {
-        //   setSuccess(true);
-        //   setError(false);
-        //   setMessage(result.message);
-        //   setValidationErrors({});
-        //   form.reset();
-        //   if (result.redirectTo) {
-        //     // const data = await update();
+        if (result.success) {
+          setSuccess(true);
+          setError(false);
+          setMessage(result.message);
+          setValidationErrors({});
+          form.reset();
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+          if (redirectTo) router.push("/admin/dashboard");
+          router.refresh();
+        } else {
+          setError(true);
+          setSuccess(false);
+          setMessage(result.message);
+          form.reset(
+            {
+              email: data.email,
+            },
+            {
+              keepErrors: true,
+              keepDirty: false,
+              keepTouched: false,
+              keepIsSubmitted: false,
+            },
+          );
+        }
+        console.log(data);
 
-        //     // if (data?.user?.isNewUser) {
-        //     // router.push("/welcome");
-        //     // } else {
-        //     router.push(result.redirectTo);
-        //     // }
-        //   }
-        //   router.refresh();
-        // } else {
-        //   setError(true);
-        //   setSuccess(false);
-        //   setMessage(result.message);
-        //   form.reset(
-        //     {
-        //       email: data.email,
-        //     },
-        //     {
-        //       keepErrors: true,
-        //       keepDirty: false,
-        //       keepTouched: false,
-        //       keepIsSubmitted: false,
-        //     },
-        //   );
-        // }
-        // console.log(data);
+        
       } catch (error: any) {
         setError(true);
         setMessage(error.message || "An error occurred. Please try again.");

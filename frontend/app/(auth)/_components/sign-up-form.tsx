@@ -12,6 +12,7 @@ import { Alert } from "@heroui/alert";
 import { useRouter } from "next/navigation";
 
 import { RegisterSchema } from "@/schemas";
+import { signUpAction } from "@/actions/sign-up";
 
 export const SignUpForm = ({ redirectTo }: { redirectTo?: string }) => {
   const [error, setError] = useState(false);
@@ -46,44 +47,45 @@ export const SignUpForm = ({ redirectTo }: { redirectTo?: string }) => {
     startTransition(async () => {
       try {
         console.log("data", data);
-        // const result = await signUpAction(data, {
-        //   redirectTo: redirectTo,
-        // });
+        const result = await signUpAction(data, {
+          redirectTo: redirectTo,
+        });
 
-        // if (!result.success && result.fieldErrors) {
-        //   Object.entries(result.fieldErrors).forEach(([field, messages]) => {
-        //     if (messages.length > 0) {
-        //       form.setError(field as keyof typeof data, {
-        //         type: "server",
-        //         message: messages[0],
-        //       });
-        //     }
-        //   });
-        // }
-        // if (result.success) {
-        //   setSuccess(true);
-        //   setError(false);
-        //   setMessage(result.message);
-        //   setValidationErrors({});
-        //   form.reset();
-        //   if (redirectTo) router.push(redirectTo);
-        // } else {
-        //   setSuccess(false);
-        //   setError(true);
-        //   setMessage(result.message);
-        //   form.reset(
-        //     {
-        //       email: data.email,
-        //       name: data.name,
-        //     },
-        //     {
-        //       keepErrors: true,
-        //       keepDirty: false,
-        //       keepTouched: false,
-        //       keepIsSubmitted: false,
-        //     },
-        //   );
-        // }
+        if (!result.success && result.fieldErrors) {
+          Object.entries(result.fieldErrors).forEach(([field, messages]) => {
+            if (messages.length > 0) {
+              form.setError(field as keyof typeof data, {
+                type: "server",
+                message: messages[0],
+              });
+            }
+          });
+        }
+        if (result.success) {
+          setSuccess(true);
+          setError(false);
+          setMessage(result.message);
+          setValidationErrors({});
+          form.reset();
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+          if (redirectTo) router.push("/admin/dashboard");
+        } else {
+          setSuccess(false);
+          setError(true);
+          setMessage(result.message);
+          form.reset(
+            {
+              email: data.email,
+              name: data.name,
+            },
+            {
+              keepErrors: true,
+              keepDirty: false,
+              keepTouched: false,
+              keepIsSubmitted: false,
+            },
+          );
+        }
       } catch (error: any) {
         // console.error("Sign-up error:", error);
         setError(true);

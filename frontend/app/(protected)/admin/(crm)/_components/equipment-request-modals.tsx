@@ -589,7 +589,7 @@ export const EquipmentRequestCreateModal = ({
     // } finally {
     //   setIsLoading(false);
     // }
-    
+
     await new Promise((resolve) => setTimeout(resolve, 500));
     addToast({
       title: "Request created",
@@ -597,7 +597,7 @@ export const EquipmentRequestCreateModal = ({
       color: "success",
     });
 
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   return (

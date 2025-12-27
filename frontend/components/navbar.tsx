@@ -62,7 +62,7 @@ export const Navbar = () => {
             as={NextLink}
             className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold"
             endContent={<ArrowRight className="w-4 h-4" />}
-            href="/get-started"
+            href="/sign-up"
           >
             Get Started
           </Button>
