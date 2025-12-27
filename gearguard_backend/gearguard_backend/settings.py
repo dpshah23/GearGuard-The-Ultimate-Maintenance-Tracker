@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'analytics',
-    'departments',
+    'departements',
     'equipment',
     'maintenance',
     'users',
@@ -121,6 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Use custom user model defined in users app.
+AUTH_USER_MODEL = 'users.GearguardUser'
 
 
 # Internationalization

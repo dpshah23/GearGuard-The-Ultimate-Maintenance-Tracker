@@ -1,2 +1,14 @@
 .venv
 .env
+__pycache__/
+*.pyc
+db.sqlite3
+/gearguard_backend/migrations/
+/gearguard_frontend/build/
+/gearguard_frontend/node_modules/
+.vscode/
+.DS_Store
+.idea/
+*.log
+coverage/
+

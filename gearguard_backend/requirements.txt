@@ -1,0 +1,9 @@
+django
+django-rest-framework
+djangorestframework-simplejwt
+psycopg2-binary
+corsheaders
+python-dotenv
+Pillow
+drf-yasg
+django-jazzmin
