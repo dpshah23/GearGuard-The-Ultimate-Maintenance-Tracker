@@ -11,7 +11,6 @@ import {
   TrendingDown,
   Users,
   DollarSign,
-  Activity,
   BarChart3,
   Plus,
   Calendar,
@@ -31,36 +30,33 @@ const DashboardPage = () => {
 
   const stats = [
     {
-      label: "Total Users",
-      value: "1,247",
-      change: "+12%",
-      trend: "up",
+      label: "Critical Equipment Issues",
+      value: "1",
+      subtitle: "Urgent Follow-up Required",
       icon: <Users />,
-      color: "bg-primary-500/20",
+      color: "bg-danger-500/10",
+      colorContrast: "bg-danger-500/70",
+      borderColor: "border-danger",
     },
     {
-      label: "Active Deals",
-      value: "23",
-      change: "+5%",
-      trend: "up",
-      icon: <BarChart3 />,
-      color: "bg-success-500/20",
-    },
-    {
-      label: "Revenue",
-      value: "Rs45,290",
-      change: "+18%",
-      trend: "up",
+      label: "Technician Availability",
+      value: "15",
+      subtitle: "Closing This Week",
       icon: <DollarSign />,
-      color: "bg-secondary-500/10",
+      color: "bg-primary-500/10",
+      colorContrast: "bg-primary-500/70",
+      borderColor: "border-warning",
     },
     {
-      label: "Conversion Rate",
-      value: "3.2%",
-      change: "-2%",
-      trend: "down",
-      icon: <Activity />,
-      color: "bg-warning-500/10",
+      label: "Open Maintenance Requests",
+      value: "3",
+      subtitle: "In Progress",
+      icon: <BarChart3 />,
+      color: "bg-success-500/10",
+      colorContrast: "bg-success-500/70",
+      borderColor: "border-success",
+      trend: "up",
+      change: "12%",
     },
   ];
 
@@ -123,7 +119,7 @@ const DashboardPage = () => {
   return (
     <div className="space-y-6 sm:space-y-8 max-w-7xl">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 sm:gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 sm:gap-6">
         <StaggeredFadeInList>
           {stats.map((stat, index) => {
             const trendColor =
@@ -136,7 +132,7 @@ const DashboardPage = () => {
                 className="transition-shadow duration-200 bg-content1 hover:shadow-md"
                 shadow="sm"
               >
-                <CardBody className="p-4 sm:p-6">
+                <CardBody className={`p-4 sm:p-6  ${stat.color} `}>
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0">
                       <p className="mb-1 text-sm font-medium truncate text-foreground/60">
@@ -155,9 +151,7 @@ const DashboardPage = () => {
                         </span>
                       </div>
                     </div>
-                    <div className={`p-2 rounded-lg sm:p-3 ${stat.color} `}>
-                      {stat.icon}
-                    </div>
+                    <div className={`p-2 rounded-lg sm:p-3  ${stat.colorContrast} `}>{stat.icon}</div>
                   </div>
                 </CardBody>
               </Card>

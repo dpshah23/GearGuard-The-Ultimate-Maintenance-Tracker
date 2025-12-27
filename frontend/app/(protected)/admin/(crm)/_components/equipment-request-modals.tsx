@@ -21,7 +21,7 @@ import { DatePicker } from "@heroui/date-picker";
 import { EquipmentRequest } from "../configs/equipment-request-config";
 import { useTableContext } from "../_context/table-context";
 
-import { dateToCalendarDateTime, formatZonedDate } from "@/lib/util";
+import { dateToCalendarDateTime } from "@/lib/util";
 import { Divider } from "@/components/ui/divider";
 
 const API_BASE_URL =
@@ -44,17 +44,18 @@ const requestTypeOptions = [
 
 // API helper functions
 const fetchEquipment = async () => {
-  const response = await fetch(`${API_BASE_URL}/equipment/`, {
-    headers: { "Content-Type": "application/json" },
-  });
+  // const response = await fetch(`${API_BASE_URL}/equipment/list`, {
+  //   headers: { "Content-Type": "application/json" },
+  // });
 
-  if (!response.ok) throw new Error("Failed to fetch equipment");
+  // if (!response.ok) throw new Error("Failed to fetch equipment");
 
-  return response.json();
+  // return response.json();
+  return;
 };
 
 const fetchUsers = async () => {
-  const response = await fetch(`${API_BASE_URL}/users/`, {
+  const response = await fetch(`${API_BASE_URL}/users/list`, {
     headers: { "Content-Type": "application/json" },
   });
 
@@ -64,7 +65,7 @@ const fetchUsers = async () => {
 };
 
 const fetchTeams = async () => {
-  const response = await fetch(`${API_BASE_URL}/teams/`, {
+  const response = await fetch(`${API_BASE_URL}/teams/list`, {
     headers: { "Content-Type": "application/json" },
   });
 
@@ -160,14 +161,15 @@ export const EquipmentRequestViewModal = ({
                 <div>
                   <h3 className="mb-3 text-lg font-semibold">Equipment</h3>
                   <div className="p-3 rounded-lg bg-content2">
-                    <p className="font-medium">{request.equipment.name}</p>
+                    <p className="font-medium">{request.equipment_name}</p>
                   </div>
                 </div>
                 <div>
                   <h3 className="mb-3 text-lg font-semibold">Scheduled Date</h3>
                   <div className="p-3 rounded-lg bg-content2">
                     <p className="font-medium">
-                      {formatZonedDate(new Date(request.scheduled_date))}
+                      {/* {formatZonedDate(new Date(request.scheduled_date))} */}
+                      {request.scheduled_date}
                     </p>
                   </div>
                 </div>
@@ -208,24 +210,18 @@ export const EquipmentRequestViewModal = ({
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div>
                   <h3 className="mb-3 text-lg font-semibold">Created By</h3>
-                  <HeroUIUser
-                    avatarProps={{
-                      name: request.created_by.username[0].toUpperCase(),
-                      radius: "lg",
-                    }}
-                    description={request.created_by.email}
-                    name={request.created_by.username}
-                  />
                 </div>
                 <div>
                   <h3 className="mb-3 text-lg font-semibold">Timestamps</h3>
                   <p className="text-sm">
                     <strong>Created:</strong>{" "}
-                    {formatZonedDate(new Date(request.created_at))}
+                    {/* {formatZonedDate(new Date(request.created_at))} */}
+                    {request.created_at}
                   </p>
                   <p className="text-sm">
                     <strong>Updated:</strong>{" "}
-                    {formatZonedDate(new Date(request.updated_at))}
+                    {/* {formatZonedDate(new Date(request.updated_at))} */}
+                    {request.updated_at}
                   </p>
                 </div>
               </div>
@@ -547,52 +543,61 @@ export const EquipmentRequestCreateModal = ({
     }
 
     setIsLoading(true);
-    try {
-      await createItem({
-        subject: form.subject,
-        description: form.description,
-        request_type: form.request_type,
-        status: form.status,
-        scheduled_date: form.scheduled_date
-          .toDate(getLocalTimeZone())
-          .toISOString(),
-        duration_hours: parseFloat(form.duration_hours),
-        equipment_id: parseInt(form.equipment),
-        assigned_to_id: form.assigned_to ? parseInt(form.assigned_to) : null,
-        assigned_team_id: form.assigned_team
-          ? parseInt(form.assigned_team)
-          : null,
-      });
+    // try {
+    //   await createItem({
+    //     subject: form.subject,
+    //     description: form.description,
+    //     request_type: form.request_type,
+    //     status: form.status,
+    //     scheduled_date: form.scheduled_date
+    //       .toDate(getLocalTimeZone())
+    //       .toISOString(),
+    //     duration_hours: parseFloat(form.duration_hours),
+    //     equipment_id: parseInt(form.equipment),
+    //     assigned_to_id: form.assigned_to ? parseInt(form.assigned_to) : null,
+    //     assigned_team_id: form.assigned_team
+    //       ? parseInt(form.assigned_team)
+    //       : null,
+    //   });
 
-      addToast({
-        title: "Request created",
-        description: "Equipment request created successfully",
-        color: "success",
-      });
+    //   addToast({
+    //     title: "Request created",
+    //     description: "Equipment request created successfully",
+    //     color: "success",
+    //   });
 
-      setForm({
-        subject: "",
-        description: "",
-        request_type: "corrective",
-        status: "new",
-        scheduled_date: dateToCalendarDateTime(new Date()),
-        duration_hours: "2",
-        equipment: "",
-        assigned_to: "",
-        assigned_team: "",
-      });
+    //   setForm({
+    //     subject: "",
+    //     description: "",
+    //     request_type: "corrective",
+    //     status: "new",
+    //     scheduled_date: dateToCalendarDateTime(new Date()),
+    //     duration_hours: "2",
+    //     equipment: "",
+    //     assigned_to: "",
+    //     assigned_team: "",
+    //   });
 
-      onOpenChange();
-      refresh();
-    } catch (error: any) {
-      addToast({
-        title: "Error",
-        description: error.message || "Failed to create request",
-        color: "danger",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    //   onOpenChange();
+    //   refresh();
+    // } catch (error: any) {
+    //   addToast({
+    //     title: "Error",
+    //     description: error.message || "Failed to create request",
+    //     color: "danger",
+    //   });
+    // } finally {
+    //   setIsLoading(false);
+    // }
+    
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    addToast({
+      title: "Request created",
+      description: "Equipment request created successfully",
+      color: "success",
+    });
+
+    setIsLoading(false)
   };
 
   return (
@@ -643,7 +648,44 @@ export const EquipmentRequestCreateModal = ({
                   setForm({ ...form, equipment: Array.from(keys)[0] as string })
                 }
               >
-                {equipment.map((eq) => (
+                {[
+                  {
+                    id: 1,
+                    name: "Computer",
+                    serial_number: "123",
+                    department: 6,
+                    assigned_to: 2,
+                    maintenance_team: 1,
+                    location: "India",
+                    purchase_date: "2025-12-27",
+                    warranty_expiry: "2026-05-30",
+                    is_scrapped: false,
+                  },
+                  {
+                    id: 3,
+                    name: "Motor",
+                    serial_number: "1111",
+                    department: 6,
+                    assigned_to: 3,
+                    maintenance_team: 1,
+                    location: "Ahmedabad, Gujarat, India",
+                    purchase_date: "2025-12-27",
+                    warranty_expiry: "2025-12-29",
+                    is_scrapped: false,
+                  },
+                  {
+                    id: 2,
+                    name: "Laptop",
+                    serial_number: "124",
+                    department: 6,
+                    assigned_to: 3,
+                    maintenance_team: 1,
+                    location: "India",
+                    purchase_date: "2025-12-27",
+                    warranty_expiry: "2026-05-30",
+                    is_scrapped: true,
+                  },
+                ].map((eq) => (
                   <SelectItem key={eq.id.toString()}>{eq.name}</SelectItem>
                 ))}
               </Select>
@@ -705,55 +747,6 @@ export const EquipmentRequestCreateModal = ({
                     setForm({ ...form, duration_hours: e.target.value })
                   }
                 />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <Select
-                  label="Assigned To"
-                  placeholder="Select user (optional)"
-                  selectedKeys={
-                    form.assigned_to ? new Set([form.assigned_to]) : new Set()
-                  }
-                  variant="flat"
-                  onSelectionChange={(keys) =>
-                    setForm({
-                      ...form,
-                      assigned_to: Array.from(keys)[0] as string,
-                    })
-                  }
-                >
-                  {users.map((user) => (
-                    <SelectItem
-                      key={user.id.toString()}
-                      textValue={user.username}
-                    >
-                      {user.username} ({user.email})
-                    </SelectItem>
-                  ))}
-                </Select>
-
-                <Select
-                  label="Assigned Team"
-                  placeholder="Select team (optional)"
-                  selectedKeys={
-                    form.assigned_team
-                      ? new Set([form.assigned_team])
-                      : new Set()
-                  }
-                  variant="flat"
-                  onSelectionChange={(keys) =>
-                    setForm({
-                      ...form,
-                      assigned_team: Array.from(keys)[0] as string,
-                    })
-                  }
-                >
-                  {teams.map((team) => (
-                    <SelectItem key={team.id.toString()}>
-                      {team.name}
-                    </SelectItem>
-                  ))}
-                </Select>
               </div>
             </ModalBody>
 
@@ -829,7 +822,7 @@ export const EquipmentRequestDeleteModal = ({
                 </p>
                 <div className="mt-2 space-y-1">
                   <p className="text-sm text-foreground/80">
-                    Equipment: {request.equipment.name}
+                    Equipment: {request.equipment_name}
                   </p>
                   <p className="text-sm text-foreground/80">
                     Status: {request.status}

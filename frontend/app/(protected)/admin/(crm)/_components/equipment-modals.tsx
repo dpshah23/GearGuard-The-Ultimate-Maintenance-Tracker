@@ -61,7 +61,7 @@ export const EquipmentViewModal = ({
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="mb-1 text-2xl font-bold text-foreground">
-                    {equipment.name}
+                    {equipment.equipment_name}
                   </h1>
                   <p className="text-sm text-foreground/60">
                     SN: {equipment.serial_number}
@@ -165,7 +165,7 @@ export const EquipmentEditModal = ({
 }) => {
   const { updateItem, refresh } = useTableContext<Equipment>();
   const [form, setForm] = useState({
-    name: equipment.name,
+    name: equipment.equipment_name,
     serial_number: equipment.serial_number,
     location: equipment.location,
     purchase_date: parseDate(equipment.purchase_date),
@@ -642,7 +642,7 @@ export const EquipmentDeleteModal = ({
               <div className="p-4 border rounded-lg bg-danger/10 border-danger/20">
                 <p>
                   Are you sure you want to delete{" "}
-                  <strong>{equipment.name}</strong>?
+                  <strong>{equipment.equipment_name}</strong>?
                 </p>
                 <div className="mt-2 space-y-1">
                   <p className="text-sm text-foreground/80">

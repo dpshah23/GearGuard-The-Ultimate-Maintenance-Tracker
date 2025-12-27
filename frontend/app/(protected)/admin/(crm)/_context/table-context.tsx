@@ -200,7 +200,11 @@ export function TableProvider<T extends BaseEntity>({
       );
 
       filtered = filtered.filter((item) => {
-        const itemValue = (item[filterColumn] as string)?.toLowerCase() || "";
+        const rawValue = item[filterColumn];
+        const itemValue =
+          typeof rawValue === "boolean"
+            ? String(rawValue) // "true" | "false"
+            : String(rawValue ?? "").toLowerCase();
         const shouldInclude = selectedFilters.includes(itemValue);
 
         return shouldInclude;
